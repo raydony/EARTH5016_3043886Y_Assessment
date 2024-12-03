@@ -1,5 +1,3 @@
-% data_setup.m: Handles data loading, rock unit extraction, and material properties initialization
-
 % 1. Load the section image and extract rock units
 section_image = imread('section.tiff');  % Read the section image
 rock_units = extract_rock_units(imresize(section_image, 0.2));  % Downsample and extract rock units
@@ -40,31 +38,27 @@ sigma = matprop(units(:), 2);    % Thermal conductivity [W/(m*K)]
 Hr = matprop(units(:), 5);       % Heat production [W/m^3]
 
 % Reshape properties to match the grid dimensions
-rho = reshape(rho, m, n);
-Cp = reshape(Cp, m, n);
+rho   = reshape(rho, m, n);
+Cp    = reshape(Cp, m, n);
 sigma = reshape(sigma, m, n);
-Hr = reshape(Hr, m, n);
+Hr    = reshape(Hr, m, n);
+
+
 
 % Calculate diffusivity (k0) based on properties
 k0 = sigma ./ (rho .* Cp);
-
 % remaining model parameters
 dTdz_top = 0;                      % flux at top
 dTdz_bot = 30/1000;                % flux at bottom
 Ttop = 0;       % (C)              % air/water temperature
 Tbot = dTdz_bot*5000;              % find temperature at model base
-
-
 yr    = 3600*24*365;  % seconds per year [s]
-tend = 1e7*yr;
-
+t_end = 1e7*yr;
 CFL   = 1/5;         % Time step limiter
 nop   = 50;          % output figure produced every 'nop' steps
-
-
 T0 = 10; % surface air temperature
-
 dTdz_boundaries = [0, 30/1000];
+
 
 function rock_units = extract_rock_units(section_image)
     % Extract rock units from grayscale section image
@@ -73,4 +67,4 @@ end
 
 
 % *****  RUN MODEL
-run('chattest.m');
+run('solution2d.m');

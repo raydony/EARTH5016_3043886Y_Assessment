@@ -1,5 +1,5 @@
 
-% set up index arrays for boundary conditions        
+% set up index arrays for boundary conditions   
 ix = [   1, 1:Nx, Nx  ];          % insulating x boundaries
 iz = [   1, 1:Nz, Nz  ];          % isothermal start boundary
 
@@ -11,13 +11,14 @@ dt = CFL * (h/2)^2 / max(k0, [], "all"); % time step [s]
 
 air = units == 9;% indices of air coordinates
 
-for t = 0:dt:t_end
+k=100;
+for t = 0:(dt*k):t_end
     % Calculate temperature changes using the diffusion function
     R1 = diffusion(T, k0, h, [1, 1:Nx, Nx], [1, 1:Nz, Nz], dTdz_boundaries(2));
     R2 = diffusion(T + R1 * dt / 2, k0, h, [1, 1:Nx, Nx], [1, 1:Nz, Nz], dTdz_boundaries(2));
     R3 = diffusion(T + R2 * dt / 2, k0, h, [1, 1:Nx, Nx], [1, 1:Nz, Nz], dTdz_boundaries(2));
     R4 = diffusion(T + R3 * dt, k0, h, [1, 1:Nx, Nx], [1, 1:Nz, Nz], dTdz_boundaries(2));
-    
+
     % Update temperature with Runge-Kutta scheme
     T = T + dt * (R1 + 2 * R2 + 2 * R3 + R4) / 6 + Hr ./ (rho .* Cp);
 end
