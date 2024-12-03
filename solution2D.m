@@ -9,11 +9,11 @@ T = T0 + dTdz_boundaries(2)*Zc;  % initialise T array (based on what emily wrote
 
 dt = CFL * (h/2)^2 / max(k0, [], "all"); % time step [s]
 
-air = units == 9;% indices of air coordinates
-k = 100;  % 时间步长增量的乘数
-t = 0;    % 初始时间 [s]
-tau = 0;  % 迭代步数计数
-% 创建图形窗口
+air = units == 9; % indices of air coordinates
+k = 100;  % multiplier for time step increment
+t = 0;    % initial time [s]
+tau = 0;  % iteration step count
+% create figure window
 figure;
 
 while t <= t_end
