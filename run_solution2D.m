@@ -71,4 +71,4 @@ end
 
 
 % *****  RUN MODEL
-run('chattest.m');
+run('solution2D.m');
