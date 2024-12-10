@@ -34,6 +34,10 @@ while t <= t_end
 
         imagesc(x_cells, z_cells, T); % Plot temperature distribution
         colorbar;
+               
+        hold on;
+        contour(x_cells, z_cells, T, [150 150], 'LineWidth', 2, 'LineColor', 'r');% Addition of isotherm at 150°C
+        hold off;
         t_years = t / yr;  % Calculate current time in years
 
         title(['Temperature Distribution at t = ' num2str(t_years) ' years']);% Update title with years
