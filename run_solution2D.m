@@ -6,15 +6,15 @@ rock_units = extract_rock_units(imresize(section_image, 0.2));  % Downsample and
 %He1,He2,Ms,Cm,Gr,Si,Sa,Bg,Air/water
 matprop = [
     % unit  conductivity  density  heat capacity  heat production
-    1        3.6788      2697.6     600          4.172
-    2        3.2197      2703.5     600          5.575
-    3        0.919       1909.78    740          1
-    4        0.924       2081.7     860          1
-    5        1           2648       740          1
-    6        1           1916       910          1
-    7        1           1942.3     740          1
-    8        1           2700       770          1
-    9        1e-6        1          1000         0];  % Air/water
+    1        3.6788      2697.6     1000          4.172
+    2        3.2197      2703.5     1000          5.575
+    3        0.919       1905.90    1000          1
+    4        0.924       2083.14    1000          1
+    5        1.68        2648       1000          1
+    6        0.249       1916       1000          1
+    7        0.37        1942.3     1000          1
+    8        1           2700       1000          1
+    9        1e-6        1          1000          0];  % Air/water
 
 % 3. Initialize the model grid and spatial dimensions (following run_transect2D.m style)
 W = 16e3;    % Domain width [m]
