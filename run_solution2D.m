@@ -1,5 +1,3 @@
-% data_setup.m: Handles data loading, rock unit extraction, and material properties initialization
-
 % 1. Load the section image and extract rock units
 section_image = imread('section.tiff');  % Read the section image
 rock_units = extract_rock_units(imresize(section_image, 0.2));  % Downsample and extract rock units
@@ -64,7 +62,7 @@ nop   = 50;          % output figure produced every 'nop' steps
 
 T0 = 10; % surface air temperature
 
-dTdz_boundaries = [0, 30/1000];
+dTdz_boundaries = [0, 35/1000];
 
 function rock_units = extract_rock_units(section_image)
     % Extract rock units from grayscale section image

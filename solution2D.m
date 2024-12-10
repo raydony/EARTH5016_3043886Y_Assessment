@@ -9,8 +9,8 @@ T = T0 + dTdz_boundaries(2)*Zc;  % initialise T array
 dt = CFL * (h/2)^2 / max(k0, [], "all"); % time step [s]
 
 air = units == 9;% indices of air coordinates
-
-for t = 0:dt:t_end
+k=100;
+for t = 0:(dt*k):t_end
     % Calculate temperature changes using the diffusion function
     R1 = diffusion(T, k0, h, [1, 1:Nx, Nx], [1, 1:Nz, Nz], dTdz_boundaries(2));
     R2 = diffusion(T + R1 * dt / 2, k0, h, [1, 1:Nx, Nx], [1, 1:Nz, Nz], dTdz_boundaries(2));
