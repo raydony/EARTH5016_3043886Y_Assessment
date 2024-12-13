@@ -38,31 +38,27 @@ kT = matprop(units(:), 2);    % Thermal conductivity [W/(m*K)]
 Hr = matprop(units(:), 5);       % Heat production [W/m^3]
 
 % Reshape properties to match the grid dimensions
-rho = reshape(rho, m, n);
-Cp = reshape(Cp, m, n);
+rho   = reshape(rho, m, n);
+Cp    = reshape(Cp, m, n);
 kT = reshape(kT, m, n);
-Hr = reshape(Hr, m, n);
+Hr    = reshape(Hr, m, n);
+
+
 
 % Calculate diffusivity (k0) based on properties
 k0 = kT ./ (rho .* Cp);
-
 % remaining model parameters
 dTdz_top = 0;                      % flux at top
 dTdz_bot = 30/1000;                % flux at bottom
 Ttop = 0;       % (C)              % air/water temperature
 Tbot = dTdz_bot*5000;              % find temperature at model base
-
-
 yr    = 3600*24*365;  % seconds per year [s]
-tend = 1e7*yr;
-
+t_end = 1e7*yr;
 CFL   = 1/5;         % Time step limiter
 nop   = 50;          % output figure produced every 'nop' steps
-
-
 T0 = 10; % surface air temperature
-
 dTdz_boundaries = [0, 35/1000];
+
 
 function rock_units = extract_rock_units(section_image)
     % Extract rock units from grayscale section image
